@@ -4,12 +4,26 @@ interface RepositoriesSate {
   data: string[]
 }
 
-interface Action {
-  type: string
-  payload?: any
+interface SearchRepositoriesAction {
+  type: 'search_repositories'
+}
+interface SearchRepositoriesSuccessAction {
+  type: 'search_repositories_success'
+  payload: string[]
 }
 
-const reducer = (state: RepositoriesSate, action: Action): RepositoriesSate => {
+interface SearchRepositoriesErrorAction {
+  type: 'search_repositories_error'
+  payload: string
+}
+
+const reducer = (
+  state: RepositoriesSate,
+  action:
+    | SearchRepositoriesAction
+    | SearchRepositoriesSuccessAction
+    | SearchRepositoriesErrorAction
+): RepositoriesSate => {
   switch (action.type) {
     case 'search_repositories':
       return { loading: true, error: null, data: [] }
